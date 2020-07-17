@@ -1,0 +1,30 @@
+<aura:component
+  implements="lightning:isUrlAddressable"
+  controller="PdfCreateClass"
+>
+  <iframe
+    src="{!'/apex/PdfPage?Id='+v.pageReference.state.c__Id}"
+    width="100%"
+    height="90%"
+    frameborder="0"
+  />
+  <div class="slds-grid">
+    <div class="slds-size_2-of-12">
+      <button
+        class="slds-button slds-button--brand slds-m-vertical_medium"
+        onclick="{!c.save}"
+      >
+        Save
+      </button>
+    </div>
+    <div>
+      <button
+        class="slds-button slds-button_outline-brand slds-m-vertical_medium"
+        onclick="{!c.cancel}"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</aura:component>	
+

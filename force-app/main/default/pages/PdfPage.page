@@ -1,0 +1,291 @@
+<apex:page renderAs="PDF" standardController="Lab_Result__c">
+
+    <body>
+        <table style=" width: 100%;">
+            <thead>
+                <tr>
+                    <th>
+                        <div style=" justify-content: center;  float:left; margin-top:30px; ">
+                            <apex:image id="theImage" value="{!$Resource.NephronLogo}" width="220" height="58" alt="Twilo Image" style=" justify-content: center; "
+                            />
+                        </div>
+                    </th>
+                    <th>
+                        <P style=" justify-content:left; font-weight:bold; font-size:12px;">
+                            Nephron Clinical Lab
+                            <br/> 4500th Street Ext West Columbia, SC 29172
+                            <br/> Phone: 803 569 2800
+                            <br/>
+                        </P>
+                    </th>
+                    <th>
+                        <P style=" justify-content: center; font-size:20px; float:right; ">
+                            COVID-19 Report
+                        </P>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+
+        <table style="width:100%; margin-top:30px; padding:0%;">
+            <tr>
+                <th style=" justify-content: center;">
+                    Patient Information
+                </th>
+                <th style=" justify-content: center;">
+                    Specimen Information
+                </th>
+                <th style=" justify-content: center;">
+                    Facility Information
+                </th>
+            </tr>
+
+            <tr>
+                <td style="font-size:12px; padding:0; ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Name:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.FirstName__c} {!Lab_Result__c.LastName__c}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Accession Number:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Facility Name:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:12px; padding:0; ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                DOB:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Date Collected:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Provider Name:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:12px; padding:0; ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Gender:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Date Received:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Address:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:12px; padding:0; ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Ethnicity:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Report Date:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Laboratory Director:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size:12px; padding:0; ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Clinical Notes from Ordering Physician:
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Sample Type:
+                            </td>
+                            <td>
+                                {!Lab_Result__c.Name}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Clinical Molecular Pathology Supervisor:
+                            </td>
+                            <td>
+
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <br/>
+        <br/>
+        <br/>
+        <div style=" border:solid 1px black; border-radius:8px; text-align: center;">
+            <p style="margin:0%; font-weight:bold; align-content: center; justify-content:center; font-size: 30px;">COVID-19 Test Result Summary</p>
+        </div>
+        <div style="padding:10px; text-align: center;">
+            <p style="margin:0%; font-weight:bold; align-content: center; justify-content:center; font-size: 30px;">
+                {!Lab_Result__c.Results__c}
+            </p>
+        </div>
+        <div>
+            <p>
+                This Test is only authorized for the duration of time the declaration that circunstances exist justifying the authorization
+                of the emergency use of vitro diagnostic test for detection of SARS-CoV-2 virus and/or diagnosis of COVID-19
+                infection under section 564(b)(1) of the Act, 21 U.S.C. 360bbb-3(b)(1), unless the authorization is terminated
+                or revoked sooner.
+            </p>
+            <p>
+                Disclaimer: The information contained in this report is intended to be interpreted by a licensed physician or other licensed
+                healthcare professional. This report is not intended to take the place of professional medical advice. Decisions
+                regarding course of medical treatment must be made only after consulting with a licensed physician or other
+                licensed healthcare professional, and should consider each patient's medical history.
+            </p>
+        </div>
+    </body>
+    <div style="
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    
+    ">
+    <div>
+        <P style=" justify-content:left; font-weight:bold; font-size:12px; width: 100%;">
+            Nephron Clinical Lab
+            <br/> 4500th Street Ext West Columbia, SC 29172
+            <br/> Phone: 803 569 2800
+            <br/>
+        </P>
+    </div>
+        <table style="border-top: 2px solid black; width: 100%;">
+            <tr>
+                <th style="font-size:11px;">
+                    Patient: {!Lab_Result__c.FirstName__c} {!Lab_Result__c.LastName__c}
+                </th>
+                <th style="font-size:11px;">
+                    Accession: {!Lab_Result__c.Name}
+                </th>
+            </tr>
+        </table>
+    </div>
+
+
+    <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]}" width="650" height="850"></apex:image>
+    <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]+'2'}" width="650" height="850"></apex:image>
+
+</apex:page>
