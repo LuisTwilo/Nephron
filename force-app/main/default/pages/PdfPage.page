@@ -1,12 +1,12 @@
 <apex:page renderAs="PDF" standardController="Lab_Result__c">
 
-    <body>
+    <body style=" min-height: 100%;">
         <table style=" width: 100%;">
             <thead>
                 <tr>
                     <th>
                         <div style=" justify-content: center;  float:left; margin-top:30px; ">
-                            <apex:image id="theImage" value="{!$Resource.NephronLogo}" width="220" height="58" alt="Twilo Image" style=" justify-content: center; "
+                            <apex:image id="theImage" value="{!$Resource.NephronLogo}" width="216" height="96" alt="Twilo Image" style=" justify-content: center; "
                             />
                         </div>
                     </th>
@@ -15,7 +15,7 @@
                             Nephron Clinical Lab
                             <br/> 4500th Street Ext West Columbia, SC 29172
                             <br/> Phone: 803 569 2800
-                            <br/>
+                            <br/>CLIA#: 123456789
                         </P>
                     </th>
                     <th>
@@ -57,10 +57,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Accession Number:
+                                Test-Type:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                {!Lab_Result__c.Test_Type__c}
                             </td>
                         </tr>
                     </table>
@@ -72,7 +72,7 @@
                                 Facility Name:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                Nephron Labs
                             </td>
                         </tr>
                     </table>
@@ -86,8 +86,11 @@
                                 DOB:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                <apex:outputText value="{0, date, MMMM d ',' yyyy}">
+                                    <apex:param value="{!Lab_Result__c.DOBirth__c}" />
+                                </apex:outputText>
                             </td>
+
                         </tr>
                     </table>
                 </td>
@@ -98,8 +101,11 @@
                                 Date Collected:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                <apex:outputText value="{0, date, MMMM d ',' yyyy}">
+                                    <apex:param value="{!Lab_Result__c.DOBirth__c}" />
+                                </apex:outputText>
                             </td>
+                            
                         </tr>
                     </table>
                 </td>
@@ -107,10 +113,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Provider Name:
+                                Address:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                               4500th Street Ext West Columbia, SC-29172
                             </td>
                         </tr>
                     </table>
@@ -124,7 +130,7 @@
                                 Gender:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                {!Lab_Result__c.Patient__r.Sex__c}
                             </td>
                         </tr>
                     </table>
@@ -133,10 +139,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Date Received:
+                                Time Collected:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                10:25 
                             </td>
                         </tr>
                     </table>
@@ -145,10 +151,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Address:
+                                CLIA#:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                              123456789
                             </td>
                         </tr>
                     </table>
@@ -159,7 +165,19 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Ethnicity:
+                                <!-- here is ethnicity space -->
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="font-size:12px; padding:0;  ">
+                    <table style="padding: 0%;">
+                        <tr>
+                            <td style="font-weight: bold;">
+                                Specimen Id:
                             </td>
                             <td>
                                 {!Lab_Result__c.Name}
@@ -170,23 +188,11 @@
                 <td style="font-size:12px; padding:0;  ">
                     <table style="padding: 0%;">
                         <tr>
-                            <td style="font-weight: bold;">
-                                Report Date:
+                            <td style="font-weight: bold; ">
+                                Laboratory Director
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Laboratory Director:
-                            </td>
-                            <td>
-                                {!Lab_Result__c.Name}
+                                Jhon Doe
                             </td>
                         </tr>
                     </table>
@@ -197,7 +203,7 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Clinical Notes from Ordering Physician:
+                               <!-- Clinical Notes from Ordering Physician: -->
                             </td>
                             <td>
 
@@ -209,10 +215,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold;">
-                                Sample Type:
+                                
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                
                             </td>
                         </tr>
                     </table>
@@ -220,11 +226,11 @@
                 <td style="font-size:12px; padding:0;  ">
                     <table style="padding: 0%;">
                         <tr>
-                            <td style="font-weight: bold;">
-                                Clinical Molecular Pathology Supervisor:
+                            <td style="font-weight:bold; padding: 0%;">
+                                Clinical Molecular Pathology Supervisor 
                             </td>
                             <td>
-
+                                Jhon Oswald Doe
                             </td>
                         </tr>
                     </table>
@@ -255,37 +261,33 @@
                 regarding course of medical treatment must be made only after consulting with a licensed physician or other
                 licensed healthcare professional, and should consider each patient's medical history.
             </p>
+            <div>
+                <P style=" justify-content:left;  width: 100%;">
+                    This test performed by Nephron Clinical Lab 4500th Street Ext West Columbia, SC 29172 Phone: 803 569 2800
+                </P>
+            </div>
         </div>
     </body>
-    <div style="
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+        <div id="print-footer" style="
+        width: 100%;
+        ">
     
-    ">
-    <div>
-        <P style=" justify-content:left; font-weight:bold; font-size:12px; width: 100%;">
-            Nephron Clinical Lab
-            <br/> 4500th Street Ext West Columbia, SC 29172
-            <br/> Phone: 803 569 2800
-            <br/>
-        </P>
+            <table style="border-top: 2px solid black; width: 100%;">
+                <tr>
+                    <th style="font-size:11px;">
+                        Nephron Clinical Lab
+                            <br/> 4500th Street Ext West Columbia, SC 29172
+                            <br/>CLIA#: 123456789
+                    </th>
+                </tr>
+            </table>
+        </div>
+    
+    <div class="fact-sheets">
+        <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]}" width="100%" height="100%"></apex:image>
+        <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]+'2'}" width="100%" height="100%"></apex:image>
     </div>
-        <table style="border-top: 2px solid black; width: 100%;">
-            <tr>
-                <th style="font-size:11px;">
-                    Patient: {!Lab_Result__c.FirstName__c} {!Lab_Result__c.LastName__c}
-                </th>
-                <th style="font-size:11px;">
-                    Accession: {!Lab_Result__c.Name}
-                </th>
-            </tr>
-        </table>
-    </div>
-
-
-    <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]}" width="650" height="850"></apex:image>
-    <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]+'2'}" width="650" height="850"></apex:image>
-
+   
 </apex:page>
