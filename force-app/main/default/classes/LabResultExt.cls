@@ -10,7 +10,7 @@ public with sharing class LabResultExt {
             labResultIds.add(labR.Id);
             System.debug(labR.Id);
         }
-        labResultsList = [SELECT Name, FirstName__c, MInitial__c,  LastName__c, Collect_Date__c,
-        Collect_Time__c, DOBirth__c, Employee_ID__c, Results__c FROM Lab_Result__c WHERE Id IN: labResultIds];
+        labResultsList = [SELECT Name, FirstName__c, MInitial__c,  LastName__c, DOBirth__c, Collect_Date__c,
+        Collect_Time__c, Employee_ID__c, Test_Type__c, Results__c FROM Lab_Result__c WHERE Id IN: labResultIds];
     }
 }

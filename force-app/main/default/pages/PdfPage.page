@@ -72,7 +72,7 @@
                                 Facility Name:
                             </td>
                             <td>
-                                Nephron Labs
+                                Nephron Pharmaceuticals
                             </td>
                         </tr>
                     </table>
@@ -86,7 +86,7 @@
                                 DOB:
                             </td>
                             <td>
-                                <apex:outputText value="{0, date, MMMM d ',' yyyy}">
+                                <apex:outputText value="{0, date, MMMM d','yyyy}">
                                     <apex:param value="{!Lab_Result__c.DOBirth__c}" />
                                 </apex:outputText>
                             </td>
@@ -101,8 +101,8 @@
                                 Date Collected:
                             </td>
                             <td>
-                                <apex:outputText value="{0, date, MMMM d ',' yyyy}">
-                                    <apex:param value="{!Lab_Result__c.DOBirth__c}" />
+                                <apex:outputText value="{0, date, MMMM d',' yyyy}">
+                                    <apex:param value="{!Lab_Result__c.Collect_Date__c}" />
                                 </apex:outputText>
                             </td>
                             
@@ -142,7 +142,12 @@
                                 Time Collected:
                             </td>
                             <td>
-                                10:25 
+                                <apex:outputText value="{0,number,00}">
+                                    <apex:param value="{!Hour(Lab_Result__c.Collect_Time__c)}" />
+                                </apex:outputText>: 
+                                <apex:outputText value="{0,number,00}">
+                                    <apex:param value="{!Minute(Lab_Result__c.Collect_Time__c)}" />
+                                </apex:outputText>
                             </td>
                         </tr>
                     </table>
@@ -180,7 +185,7 @@
                                 Specimen Id:
                             </td>
                             <td>
-                                {!Lab_Result__c.Name}
+                                {!Lab_Result__c.Patient__r.Specimen_ID__c}
                             </td>
                         </tr>
                     </table>
@@ -250,7 +255,7 @@
         </div>
         <div>
             <p>
-                This Test is only authorized for the duration of time the declaration that circunstances exist justifying the authorization
+                This Test is only authorized for the duration of time the declaration that circumstances exist justifying the authorization
                 of the emergency use of vitro diagnostic test for detection of SARS-CoV-2 virus and/or diagnosis of COVID-19
                 infection under section 564(b)(1) of the Act, 21 U.S.C. 360bbb-3(b)(1), unless the authorization is terminated
                 or revoked sooner.

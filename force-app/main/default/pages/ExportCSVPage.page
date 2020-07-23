@@ -1,0 +1,16 @@
+<apex:page standardController="Lab_Result__c" extensions="LabResultExt" recordSetVar="LabResults" contentType="application/vnd.ms-excel#Report.xls" cache="true">
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!labResultsList}" var="lr">
+            <apex:column value="{!lr.Name}"/>   
+            <apex:column value="{!lr.FirstName__c}"/>
+            <apex:column value="{!lr.MInitial__c}"/>
+            <apex:column value="{!lr.LastName__c}"/>
+            <apex:column value="{!lr.DOBirth__c}"/>
+            <apex:column value="{!lr.Employee_ID__c}"/>
+            <apex:column value="{!lr.Collect_Date__c}"/>
+            <apex:column value="{!lr.Collect_Time__c}"/>
+            <apex:column value="{!lr.Test_Type__c}"/>
+            <apex:column value="{!lr.Results__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
