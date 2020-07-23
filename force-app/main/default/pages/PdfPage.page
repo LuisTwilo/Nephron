@@ -13,9 +13,10 @@
                     <th>
                         <P style=" justify-content:left; font-weight:bold; font-size:12px;">
                             Nephron Clinical Lab
-                            <br/> 4500th Street Ext West Columbia, SC 29172
-                            <br/> Phone: 803 569 2800
-                            <br/>CLIA#: 123456789
+                            <br/> 4500 12th Street Ext West Columbia, SC 29172
+                            <br/> Phone: 803 381 1045
+                            <br/>CLIA#: 42D2182204
+
                         </P>
                     </th>
                     <th>
@@ -60,7 +61,7 @@
                                 Test-Type:
                             </td>
                             <td>
-                                {!Lab_Result__c.Test_Type__c}
+                                {!Lab_Result__c.TypeLabel__c}
                             </td>
                         </tr>
                     </table>
@@ -72,7 +73,7 @@
                                 Facility Name:
                             </td>
                             <td>
-                                Nephron Pharmaceuticals
+                                Nephron Clinical Labs
                             </td>
                         </tr>
                     </table>
@@ -116,7 +117,7 @@
                                 Address:
                             </td>
                             <td>
-                               4500th Street Ext West Columbia, SC-29172
+                               4500 12th Street Ext West Columbia, SC-29172
                             </td>
                         </tr>
                     </table>
@@ -144,7 +145,7 @@
                             <td>
                                 <apex:outputText value="{0,number,00}">
                                     <apex:param value="{!Hour(Lab_Result__c.Collect_Time__c)}" />
-                                </apex:outputText>: 
+                                </apex:outputText> 
                                 <apex:outputText value="{0,number,00}">
                                     <apex:param value="{!Minute(Lab_Result__c.Collect_Time__c)}" />
                                 </apex:outputText>
@@ -159,7 +160,7 @@
                                 CLIA#:
                             </td>
                             <td>
-                              123456789
+                                42D2182204
                             </td>
                         </tr>
                     </table>
@@ -194,10 +195,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight: bold; ">
-                                Laboratory Director
+                                
                             </td>
                             <td>
-                                Jhon Doe
+                                
                             </td>
                         </tr>
                     </table>
@@ -232,10 +233,10 @@
                     <table style="padding: 0%;">
                         <tr>
                             <td style="font-weight:bold; padding: 0%;">
-                                Clinical Molecular Pathology Supervisor 
+                                
                             </td>
                             <td>
-                                Jhon Oswald Doe
+                                
                             </td>
                         </tr>
                     </table>
@@ -249,11 +250,27 @@
             <p style="margin:0%; font-weight:bold; align-content: center; justify-content:center; font-size: 30px;">COVID-19 Test Result Summary</p>
         </div>
         <div style="padding:10px; text-align: center;">
-            <p style="margin:0%; font-weight:bold; align-content: center; justify-content:center; font-size: 30px;">
-                {!Lab_Result__c.Results__c}
-            </p>
+            <table style="width:100%">
+                <tr>
+                    <th style="text-decoration: underline">
+                        Test
+                    </th>
+                    <th style="text-decoration: underline">
+                       Result 
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        {!Lab_Result__c.SaarsLabel__c} 
+                    </td>
+                    <td style="font-weight:bold;">
+                        {!Lab_Result__c.Results__c}
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div>
+        <br/><br/><br/>
+        <div style="font-size:10pt">
             <p>
                 This Test is only authorized for the duration of time the declaration that circumstances exist justifying the authorization
                 of the emergency use of vitro diagnostic test for detection of SARS-CoV-2 virus and/or diagnosis of COVID-19
@@ -268,7 +285,7 @@
             </p>
             <div>
                 <P style=" justify-content:left;  width: 100%;">
-                    This test performed by Nephron Clinical Lab 4500th Street Ext West Columbia, SC 29172 Phone: 803 569 2800
+                    This test was performed by Nephron Clinical Lab 4500 12th Street Ext West Columbia, SC 29172 Phone: 803 381 1045
                 </P>
             </div>
         </div>
@@ -283,8 +300,9 @@
                 <tr>
                     <th style="font-size:11px;">
                         Nephron Clinical Lab
-                            <br/> 4500th Street Ext West Columbia, SC 29172
-                            <br/>CLIA#: 123456789
+                            <br/> 4500 12th Street Ext West Columbia, SC 29172
+                            <br/>CLIA#: 42D2182204
+
                     </th>
                 </tr>
             </table>
