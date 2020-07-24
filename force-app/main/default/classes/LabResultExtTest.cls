@@ -8,6 +8,7 @@ public with sharing class LabResultExtTest {
         labRes = new List<Lab_Result__c>();
         labR =  new Lab_Result__c(
             Patient__c = '0030v00000RvJeAAAV',
+            Account__c = '0010v00000YCp7dAAD',
             Results__c = 'Positive'
             );
        

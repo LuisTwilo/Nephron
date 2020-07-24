@@ -102,7 +102,7 @@
                                 Date Collected:
                             </td>
                             <td>
-                                <apex:outputText value="{0, date, MMMM d',' yyyy}">
+                                <apex:outputText value="{0, date, MMMM d','yyyy}">
                                     <apex:param value="{!Lab_Result__c.Collect_Date__c}" />
                                 </apex:outputText>
                             </td>
