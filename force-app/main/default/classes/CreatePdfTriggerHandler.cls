@@ -24,6 +24,8 @@ public with sharing class CreatePdfTriggerHandler {
     public static void handlePdfCreate(Map<Id,Lab_Result__c> results) {
         Set<Id> resIds = new Set<Id>();
         resIds = results.keySet();
-        PdfCreateClass.savePDF(resIds);
+        if(!System.isFuture()){
+          PdfCreateClass.savePDF(resIds);
+        }
     }
 }

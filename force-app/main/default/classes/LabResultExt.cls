@@ -34,7 +34,7 @@ public with sharing class LabResultExt {
         labResultsList = [SELECT FirstName__c, MInitial__c,  LastName__c, DOBirth__c,
         Patient__r.Phone,  Patient__r.Sex__c, Patient__r.MailingCity, 
         Patient__r.MailingCountry, Patient__r.MailingState, Patient__r.MailingStreet,
-        Patient__r.MailingPostalCode, Test_Type__c, Results__c, Collect_Date__c, Collect_Time__c 
+        Patient__r.MailingPostalCode, Patient__r.County__c,  TypeLabel__c, Results__c, Collect_Date__c, Collect_Time__c 
         FROM Lab_Result__c WHERE Id IN: labResultIds];
     }
 }

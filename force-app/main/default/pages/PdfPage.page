@@ -1,274 +1,258 @@
 <apex:page renderAs="PDF" standardController="Lab_Result__c">
 
     <body style=" min-height: 100%;">
-        <table style=" width: 100%;">
-            <thead>
+         
+        <div style=" width: 100%; justify-content: center; align-content: center; text-align: center; margin-top:30px;">
+            <apex:image id="theImage" value="{!$Resource.NephronLogo}" width="216" height="96" alt="Nephron Clinical Lab Logo" style=" justify-content: center align-itmes:center; "
+            />
+        </div>
+        <div style=" width:100%; margin-left:50px">
+            <table style="width:100%; margin-top:30px; padding:0%;">
                 <tr>
-                    <th>
-                        <div style=" justify-content: center;  float:left; margin-top:30px; ">
-                            <apex:image id="theImage" value="{!$Resource.NephronLogo}" width="216" height="96" alt="Twilo Image" style=" justify-content: center; "
-                            />
-                        </div>
+                    <th style=" justify-content: center;">
+                        Patient Information
                     </th>
-                    <th>
-                        <P style=" justify-content:left; font-weight:bold; font-size:12px;">
-                            Nephron Clinical Lab
-                            <br/> 4500 12th Street Ext West Columbia, SC 29172
-                            <br/> Phone: 803 381 1045
-                            <br/>CLIA#: 42D2182204
-
-                        </P>
+                    <th style=" justify-content: center;">
+                        Specimen Information
                     </th>
-                    <th>
-                        <P style=" justify-content: center; font-size:20px; float:right; ">
-                            COVID-19 Report
-                        </P>
+                    <th style=" justify-content: center;">
+                        Facility Information
                     </th>
                 </tr>
-            </thead>
-        </table>
-
-        <table style="width:100%; margin-top:30px; padding:0%;">
-            <tr>
-                <th style=" justify-content: center;">
-                    Patient Information
-                </th>
-                <th style=" justify-content: center;">
-                    Specimen Information
-                </th>
-                <th style=" justify-content: center;">
-                    Facility Information
-                </th>
-            </tr>
-
-            <tr>
-                <td style="font-size:12px; padding:0; ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Name:
-                            </td>
-                            <td>
-                                {!Lab_Result__c.FirstName__c} {!Lab_Result__c.LastName__c}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Test-Type:
-                            </td>
-                            <td>
-                                {!Lab_Result__c.TypeLabel__c}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Facility Name:
-                            </td>
-                            <td>
-                                Nephron Clinical Labs
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size:12px; padding:0; ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                DOB:
-                            </td>
-                            <td>
-                                <apex:outputText value="{0, date, MMMM d','yyyy}">
-                                    <apex:param value="{!Lab_Result__c.DOBirth__c}" />
-                                </apex:outputText>
-                            </td>
-
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Date Collected:
-                            </td>
-                            <td>
-                                <apex:outputText value="{0, date, MMMM d','yyyy}">
-                                    <apex:param value="{!Lab_Result__c.Collect_Date__c}" />
-                                </apex:outputText>
-                            </td>
-                            
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Address:
-                            </td>
-                            <td>
-                               4500 12th Street Ext West Columbia, SC-29172
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size:12px; padding:0; ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Gender:
-                            </td>
-                            <td>
-                                {!Lab_Result__c.Patient__r.Sex__c}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Time Collected:
-                            </td>
-                            <td>
-                                <apex:outputText value="{0,number,00}">
-                                    <apex:param value="{!Hour(Lab_Result__c.Collect_Time__c)}" />
-                                </apex:outputText> 
-                                <apex:outputText value="{0,number,00}">
-                                    <apex:param value="{!Minute(Lab_Result__c.Collect_Time__c)}" />
-                                </apex:outputText>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                CLIA#:
-                            </td>
-                            <td>
-                                42D2182204
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size:12px; padding:0; ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                <!-- here is ethnicity space -->
-                            </td>
-                            <td>
+    
+                <tr >
+                    <td style="font-size:12px;">
+                        <table>
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Name:
+                                </td>
+                                <td>
+                                    {!Lab_Result__c.FirstName__c} {!Lab_Result__c.LastName__c}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Test-Type:
+                                </td>
+                                <td>
+                                    {!Lab_Result__c.TypeLabel__c}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Facility Name:
+                                </td>
+                                <td>
+                                    Nephron Clinical Lab
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px; padding:0; ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    DOB:
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                        <apex:param value="{!Lab_Result__c.DOBirth__c}" />
+                                    </apex:outputText>
+                                </td>
+    
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Date Collected:
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                        <apex:param value="{!Lab_Result__c.Collect_Date__c}" />
+                                    </apex:outputText>
+                                </td>
                                 
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                Specimen Id:
-                            </td>
-                            <td>
-                                {!Lab_Result__c.Patient__r.Specimen_ID__c}
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold; ">
-                                
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr>
-                <td style="font-size:12px; padding:0; ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                               <!-- Clinical Notes from Ordering Physician: -->
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight: bold;">
-                                
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-                <td style="font-size:12px; padding:0;  ">
-                    <table style="padding: 0%;">
-                        <tr>
-                            <td style="font-weight:bold; padding: 0%;">
-                                
-                            </td>
-                            <td>
-                                
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Address:
+                                </td>
+                                <td>
+                                   4500 12th Street Ext.,
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px; padding:0; ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Gender:
+                                </td>
+                                <td>
+                                    {!Lab_Result__c.Patient__r.Sex__c}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Time Collected:
+                                </td>
+                                <td>
+                                    <apex:outputText value="{0,number,00}">
+                                        <apex:param value="{!Hour(Lab_Result__c.Collect_Time__c)}" />
+                                    </apex:outputText> 
+                                    <apex:outputText value="{0,number,00}">
+                                        <apex:param value="{!Minute(Lab_Result__c.Collect_Time__c)}" />
+                                    </apex:outputText>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="white-space: nowrap; overflow-x: auto;">
+                                    <div style="text-align:right; display: inline-block; ">
+                                        West Columbia, SC 29172 
+                                    </div>
+                                </td>
+                                <td >
+    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px; padding:0; ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    <!-- here is ethnicity space -->
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    Specimen Id:
+                                </td>
+                                <td>
+                                    {!Lab_Result__c.Patient__r.Specimen_ID__c}
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold; ">
+                                    CLIA#:
+                                </td>
+                                <td>
+                                    42D2182204
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-size:12px; padding:0; ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                   <!-- Clinical Notes from Ordering Physician: -->
+                                </td>
+                                <td>
+    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight: bold;">
+                                    
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="font-size:12px; padding:0;  ">
+                        <table style="padding: 0%;">
+                            <tr>
+                                <td style="font-weight:bold; padding: 0%;">
+                                    
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <br/>
         <br/>
         <br/>
         <div style=" border:solid 1px black; border-radius:8px; text-align: center;">
             <p style="margin:0%; font-weight:bold; align-content: center; justify-content:center; font-size: 30px;">COVID-19 Test Result Summary</p>
         </div>
-        <div style="padding:10px; text-align: center;">
+        <div style="text-align: center;">
             <table style="width:100%">
-                <tr>
-                    <th style="text-decoration: underline">
+                <tr style="width:100%">
+                    <th style=" width:50% text-align: center; text-decoration:underline; ">
                         Test
                     </th>
-                    <th style="text-decoration: underline">
+                    <th style=" width:50% text-align: center; text-decoration:underline;">
                        Result 
                     </th>
                 </tr>
                 <tr>
-                    <td>
+                    <td style=" width:50% ">
                         {!Lab_Result__c.SaarsLabel__c} 
                     </td>
-                    <td style="font-weight:bold;">
+                    <td style=" width:50%; font-weight:bold;">
                         {!Lab_Result__c.Results__c}
                     </td>
                 </tr>
             </table>
         </div>
+        
+        
         <br/><br/><br/>
         <div style="font-size:10pt">
             <p>
@@ -285,12 +269,12 @@
             </p>
             <div>
                 <P style=" justify-content:left;  width: 100%;">
-                    This test was performed by Nephron Clinical Lab 4500 12th Street Ext West Columbia, SC 29172 Phone: 803 381 1045
+                    This test was performed by Nephron Clinical Lab 4500 12th Street Ext., West Columbia, SC 29172. Phone: 803-381-1045
                 </P>
             </div>
         </div>
     </body>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
         <div id="print-footer" style="
         width: 100%;
@@ -300,17 +284,18 @@
                 <tr>
                     <th style="font-size:11px;">
                         Nephron Clinical Lab
-                            <br/> 4500 12th Street Ext West Columbia, SC 29172
+                            <br/> 4500 12th Street Ext., West Columbia, SC 29172
                             <br/>CLIA#: 42D2182204
+                            <br/>Phone: 803-381-1045
 
                     </th>
                 </tr>
             </table>
         </div>
-    
+ <!--
     <div class="fact-sheets">
         <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]}" width="100%" height="100%"></apex:image>
         <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]+'2'}" width="100%" height="100%"></apex:image>
     </div>
-   
+-->
 </apex:page>

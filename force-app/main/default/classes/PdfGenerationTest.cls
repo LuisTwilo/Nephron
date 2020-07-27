@@ -6,9 +6,10 @@ public with sharing class PdfGenerationTest {
         Set<Id> resIds = new Set<Id>();
         for(Integer i = 0; i<2; i++){
             Lab_Result__c r = new Lab_Result__c();
-            r.Patient__c = '0030v00000RvJeAAAV';
-            r.Account__c = '0010v00000XYPz5AAH';
+            r.Patient__c = '0036g00000WWMhRAAX';
+            r.Account__c = '0016g00000LjtcSAAR';
             r.Results__c = 'positive';
+            r.isDocumented__c = false;
             results.add(r);
         }
         insert results;

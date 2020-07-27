@@ -12,7 +12,8 @@
             <apex:column value="{!lr.Patient__r.MailingState}"/>
             <apex:column value="{!lr.Patient__r.MailingStreet}"/>
             <apex:column value="{!lr.Patient__r.MailingPostalCode}"/>
-            <apex:column value="{!lr.Test_Type__c}"/>
+            <apex:column value="{!lr.Patient__r.County__c}"/>
+            <apex:column value="{!lr.TypeLabel__c}"/>
             <apex:column value="{!lr.Collect_Date__c}"/>
             <apex:column value="{!lr.Collect_Time__c}"/>
             <apex:column value="{!lr.Results__c}"/>
