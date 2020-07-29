@@ -1,0 +1,3 @@
+<aura:component implements="force:lightningQuickAction, force:appHostable">
+    <c:communityImportTool></c:communityImportTool>
+</aura:component>	

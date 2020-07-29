@@ -1,0 +1,15 @@
+<apex:page> 
+    <apex:includeLightning />
+    <div id="importTool" />
+    <script>
+        $Lightning.use("c:lwcApp", function(){
+            $Lightning.createComponent(
+                "c:communityImportTool",
+                {},
+                "importTool",
+                function(cmp){
+                    console.log("Nephron Community Import Tool ")
+            });
+        });
+    </script>
+</apex:page>

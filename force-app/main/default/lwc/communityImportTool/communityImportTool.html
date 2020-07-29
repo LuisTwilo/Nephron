@@ -1,0 +1,38 @@
+<template>
+  <lightning-card title="Upload Files" icon-name="action:upload">
+    <div if:true={isLabResultInfo}>
+      <p class="slds-p-horizontal_small">Documment Requirements</p>
+      <p class="slds-p-around_small">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi,
+        delectus. Ut doloremque esse cum nulla ducimus quia optio consequuntur
+        minima quae, ipsa modi. Recusandae, culpa vero molestias repudiandae
+        maiores quo!
+      </p>
+    </div>
+    <div class="slds-m-vertical_medium slds-p-around_x-small">
+      <lightning-button
+        variant="brand-outline"
+        label="Upload Patients Information"
+        title="UploadPatient"
+        onclick={handlePatientClick}
+        class="slds-m-left_x-small"
+      ></lightning-button>
+      <lightning-button
+        variant="brand-outline"
+        label="Upload Lab Results"
+        title="UploadPatient"
+        onclick={handleLabResultsClick}
+        class="slds-m-left_x-small"
+      ></lightning-button>
+    </div>
+    <div  if:true={isLabResultInfo} class="slds-p-around_x-small">
+      <lightning-file-upload
+        label="Lab Results"
+        name="fileUploader"
+        accept={acceptedFormats}
+        onuploadfinished={handleUploadFinished}
+      >
+      </lightning-file-upload>
+    </div>
+  </lightning-card>
+</template>
