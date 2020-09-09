@@ -5,45 +5,50 @@ import uploadCsv from "@salesforce/apex/UploadCSVHandler.uploadCsv";
 export default class CommunityImportTool extends LightningElement {
   //@api RecordId;
   @api isLabResultInfo = false;
-  @api isPatientINfo = false;
+  @api isPatientInfo = false;
 
   get acceptedFormats() {
     return [".csv"];
   }
 
   handlePatientClick(){
-    console.log("patient info button clicked")
+    this.isLabResultInfo = false;
+    this.isPatientInfo = !this.isPatientINfo;
+
   }
 
   handleLabResultsClick(){
-    this.isLabResultInfo = this.isLabResultInfo ? false : true;
+    this.isPatientInfo = false;
+    this.isLabResultInfo = !this.isLabResultInfo; 
   }
 
-  handleUploadFinished(event) {
+   async handleUploadFinished(event) {
     // Get the list of uploaded files
     const uploadedFiles = event.detail.files;
-    console.log('inside upload finished');
-    uploadCsv({ csvDocumentId: uploadedFiles[0].documentId })
-      .then(() => {
-        this.dispatchEvent(
-          new ShowToastEvent({
-            title: "Success",
-            message:
-              uploadedFiles.length +
-              " Files uploaded Successfully: " +
-              uploadedFiles[0].name,
-            variant: "success"
-          })
-        );
-      })
-      .catch((error) => {
-        this.dispatchEvent(
-            new ShowToastEvent({
-              title: "Error",
-              message: JSON.stringify(error),
-              variant: 'error',
-            })
-          );
-      });
+    
+    try{
+      await uploadCsv({ csvDocumentId: uploadedFiles[0].documentId })
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Success",
+          message:
+            uploadedFiles.length +
+            " Files uploaded Successfully: " +
+            uploadedFiles[0].name,
+          variant: "success"
+        })
+      );
+    }
+    catch(err)
+    {
+      console.error(err);
+      this.dispatchEvent(
+        new ShowToastEvent({
+          title: "Error",
+          message: JSON.stringify(err.body.message),
+          variant: 'error',
+        })
+      );
+    }
   }
 }

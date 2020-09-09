@@ -34,5 +34,14 @@
       >
       </lightning-file-upload>
     </div>
+    <div  if:true={isPatientInfo} class="slds-p-around_x-small">
+      <lightning-file-upload
+        label="Patients"
+        name="fileUploader"
+        accept={acceptedFormats}
+        onuploadfinished={handleUploadFinished}
+      >
+      </lightning-file-upload>
+    </div>
   </lightning-card>
 </template>

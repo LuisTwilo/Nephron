@@ -5,18 +5,34 @@
             <apex:column value="{!lr.MInitial__c}"/>
             <apex:column value="{!lr.LastName__c}"/>
             <apex:column value="{!lr.DOBirth__c}"/>
-            <apex:column value="{!lr.Patient__r.Phone}"/>
             <apex:column value="{!lr.Patient__r.Sex__c}"/>
+            <apex:column value="{!lr.Patient__r.Race__c}"/>          
+            <apex:column value="{!lr.Patient__r.Phone}"/>
             <apex:column value="{!lr.Patient__r.MailingCity}"/>
             <apex:column value="{!lr.Patient__r.MailingCountry}"/>
             <apex:column value="{!lr.Patient__r.MailingState}"/>
             <apex:column value="{!lr.Patient__r.MailingStreet}"/>
             <apex:column value="{!lr.Patient__r.MailingPostalCode}"/>
             <apex:column value="{!lr.Patient__r.County__c}"/>
-            <apex:column value="{!lr.TypeLabel__c}"/>
+            <apex:column value="{!lr.Account__r.Name}" headerValue="Ordering Facility"/>
+            <apex:column value="{!lr.Account__r.BillingCity}"/>
+            <apex:column value="{!lr.Account__r.BillingCountry}"/>
+            <apex:column value="{!lr.Account__r.BillingState}"/>
+            <apex:column value="{!lr.Account__r.BillingStreet}"/>
+            <apex:column value="{!lr.Account__r.BillingPostalCode}"/>
+            <apex:column value="{!lr.Patient__r.Patient_ID__c}"/>
+            <apex:column value="{!lr.Patient__r.Specimen_ID__c}"/>
+            <apex:column value="{!lr.Patient__r.First_test__c}"/>
+            <apex:column value="{!lr.Patient__r.Employed_in_healthcare__c}"/>
+            <apex:column value="{!lr.Patient__r.Symptomatic_as_defined_by_CDC__c}"/>
+            <apex:column value="{!lr.Patient__r.Hospitalized__c}"/>
+            <apex:column value="{!lr.Patient__r.ICU__c}"/>
+            <apex:column value="{!lr.Patient__r.Resident_in_a_congregate_care_setting__c}"/>
+            <apex:column value="{!lr.Patient__r.Pregnant__c}"/>
             <apex:column value="{!lr.Collect_Date__c}"/>
             <apex:column value="{!lr.Collect_Time__c}"/>
             <apex:column value="{!lr.Results__c}"/>
         </apex:pageBlockTable>
     </apex:pageBlock>
 </apex:page>
+

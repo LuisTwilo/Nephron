@@ -1,7 +1,7 @@
 <apex:page renderAs="PDF" standardController="Lab_Result__c">
 
     <body style=" min-height: 100%;">
-         
+
         <div style=" width: 100%; justify-content: center; align-content: center; text-align: center; margin-top:30px;">
             <apex:image id="theImage" value="{!$Resource.NephronLogo}" width="216" height="96" alt="Nephron Clinical Lab Logo" style=" justify-content: center align-itmes:center; "
             />
@@ -19,8 +19,8 @@
                         Facility Information
                     </th>
                 </tr>
-    
-                <tr >
+
+                <tr>
                     <td style="font-size:12px;">
                         <table>
                             <tr>
@@ -70,7 +70,7 @@
                                         <apex:param value="{!Lab_Result__c.DOBirth__c}" />
                                     </apex:outputText>
                                 </td>
-    
+
                             </tr>
                         </table>
                     </td>
@@ -85,7 +85,7 @@
                                         <apex:param value="{!Lab_Result__c.Collect_Date__c}" />
                                     </apex:outputText>
                                 </td>
-                                
+
                             </tr>
                         </table>
                     </td>
@@ -96,7 +96,7 @@
                                     Address:
                                 </td>
                                 <td>
-                                   4500 12th Street Ext.,
+                                    4500 12th Street Ext.,
                                 </td>
                             </tr>
                         </table>
@@ -124,7 +124,7 @@
                                 <td>
                                     <apex:outputText value="{0,number,00}">
                                         <apex:param value="{!Hour(Lab_Result__c.Collect_Time__c)}" />
-                                    </apex:outputText> 
+                                    </apex:outputText>
                                     <apex:outputText value="{0,number,00}">
                                         <apex:param value="{!Minute(Lab_Result__c.Collect_Time__c)}" />
                                     </apex:outputText>
@@ -137,11 +137,11 @@
                             <tr>
                                 <td style="white-space: nowrap; overflow-x: auto;">
                                     <div style="text-align:right; display: inline-block; ">
-                                        West Columbia, SC 29172 
+                                        West Columbia, SC 29172
                                     </div>
                                 </td>
-                                <td >
-    
+                                <td>
+
                                 </td>
                             </tr>
                         </table>
@@ -155,7 +155,7 @@
                                     <!-- here is ethnicity space -->
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -176,10 +176,10 @@
                         <table style="padding: 0%;">
                             <tr>
                                 <td style="font-weight: bold; ">
-                                    CLIA#:
+                                    Lab Director: 
                                 </td>
                                 <td>
-                                    42D2182204
+                                    Dr Serena Altilia
                                 </td>
                             </tr>
                         </table>
@@ -190,10 +190,10 @@
                         <table style="padding: 0%;">
                             <tr>
                                 <td style="font-weight: bold;">
-                                   <!-- Clinical Notes from Ordering Physician: -->
+                                    <!-- Clinical Notes from Ordering Physician: -->
                                 </td>
                                 <td>
-    
+
                                 </td>
                             </tr>
                         </table>
@@ -202,10 +202,10 @@
                         <table style="padding: 0%;">
                             <tr>
                                 <td style="font-weight: bold;">
-                                    
+
                                 </td>
                                 <td>
-                                    
+
                                 </td>
                             </tr>
                         </table>
@@ -214,10 +214,10 @@
                         <table style="padding: 0%;">
                             <tr>
                                 <td style="font-weight:bold; padding: 0%;">
-                                    
+                                    CLIA#:
                                 </td>
                                 <td>
-                                    
+                                    42D2182204
                                 </td>
                             </tr>
                         </table>
@@ -234,32 +234,46 @@
         <div style="text-align: center;">
             <table style="width:100%">
                 <tr style="width:100%">
-                    <th style=" width:50% text-align: center; text-decoration:underline; ">
+                    <th style=" width:33% text-align: center; text-decoration:underline; ">
                         Test
                     </th>
-                    <th style=" width:50% text-align: center; text-decoration:underline;">
-                       Result 
+                    <th style=" width:33% text-align: center; text-decoration:underline;">
+                        Reference Range(s)
+                    </th>
+                    <th style=" width:33% text-align: center; text-decoration:underline;">
+                        Result
                     </th>
                 </tr>
                 <tr>
-                    <td style=" width:50% ">
-                        {!Lab_Result__c.SaarsLabel__c} 
+                    <td style=" width:33% ">
+                        {!Lab_Result__c.SaarsLabel__c}
                     </td>
-                    <td style=" width:50%; font-weight:bold;">
+                    <td style=" width:33% ">
+                        Negative
+                    </td>
+                    <td style=" width:33%; font-weight:bold;">
                         {!Lab_Result__c.Results__c}
                     </td>
                 </tr>
             </table>
         </div>
-        
-        
-        <br/><br/><br/>
+
+
+        <br/>
+        <br/>
+        <br/>
         <div style="font-size:10pt">
             <p>
                 This Test is only authorized for the duration of time the declaration that circumstances exist justifying the authorization
                 of the emergency use of vitro diagnostic test for detection of SARS-CoV-2 virus and/or diagnosis of COVID-19
                 infection under section 564(b)(1) of the Act, 21 U.S.C. 360bbb-3(b)(1), unless the authorization is terminated
                 or revoked sooner.
+            </p>
+            <p>
+                This test has been validated in accordance with the FDA's Guidance Document "Policy for Diagnostics Testing in Laboratories
+                Certified to Perform High Complexity Testing inder CLIA prior to Emergency Use Authorization for Coronavirus
+                Disease-2019 during the Public Health Emergency" issued on February 29
+                <sup>th</sup>, 2020. FDA independent review of this validation is pending
             </p>
             <p>
                 Disclaimer: The information contained in this report is intended to be interpreted by a licensed physician or other licensed
@@ -274,25 +288,32 @@
             </div>
         </div>
     </body>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
-        <div id="print-footer" style="
+    <div id="print-footer" style="
         width: 100%;
         ">
-    
-            <table style="border-top: 2px solid black; width: 100%;">
-                <tr>
-                    <th style="font-size:11px;">
-                        Nephron Clinical Lab
-                            <br/> 4500 12th Street Ext., West Columbia, SC 29172
-                            <br/>CLIA#: 42D2182204
-                            <br/>Phone: 803-381-1045
 
-                    </th>
-                </tr>
-            </table>
-        </div>
- 
+        <table style="border-top: 2px solid black; width: 100%;">
+            <tr>
+                <th style="font-size:11px;">
+                    Nephron Clinical Lab
+                    <br/> 4500 12th Street Ext., West Columbia, SC 29172
+                    <br/>CLIA#: 42D2182204
+                    <br/>Phone: 803-381-1045
+
+                </th>
+            </tr>
+        </table>
+    </div>
+
     <div class="fact-sheets">
         <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]}" width="100%" height="100%"></apex:image>
         <apex:image value="{!$Resource[Lab_Result__c.Test_Type__c]+'2'}" width="100%" height="100%"></apex:image>

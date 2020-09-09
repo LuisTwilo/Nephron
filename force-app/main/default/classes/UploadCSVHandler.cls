@@ -10,7 +10,8 @@ public with sharing class UploadCSVHandler {
                 list<String> csvData = csvLines[i].split(',');
                 System.debug('csvRowData====> '+csvData);
                 lr.Account__c = csvData[0]; // Account
-                lr.Patient__c = csvData[1]; // patient
+                Contact referenceContact = new Contact(Specimen_ID__c = csvData[1]);
+                lr.Patient__r = referenceContact; // patient reference assigned
                 lr.Results__c = csvData[2]; // Results
                 lr.Specimen_ID__c = csvData[3] ; // Specimen Id
                 labResultsToInsert.add(lr);
