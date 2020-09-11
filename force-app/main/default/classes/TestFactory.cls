@@ -1,8 +1,6 @@
 @isTest
 public with sharing class TestFactory {
-
-    
-    
+ 
     public static List<Lab_Result__c> generateLabResult(Integer numberOfResults){
         List<Lab_Result__c> labResults = new List<Lab_Result__c>();
         List<Contact> patients = generatePatients(numberOfResults);

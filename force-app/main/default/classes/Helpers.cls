@@ -2,10 +2,16 @@ public with sharing class Helpers {
     public static List<Map<String,String>> createMapOfResultsToSerialize(List<Lab_Result__c> labResults){
         List<Map<String,String>> labResultList = new List<Map<String,String>>();
         for (Lab_Result__c lr: labResults){
-            String DOB = lr.Patient__r.Birthdate.format();
-            String collectDate = lr.Collect_Date__c.format();
-            String collectTime = String.valueOf(lr.Collect_Time__c);
 
+            String DOB = '';
+            String collectDate = '';
+            String collectTime = '';
+
+            if(lr.Patient__r != null){
+                DOB = lr.Patient__r.Birthdate.format();
+                collectDate = lr.Collect_Date__c.format();
+                collectTime = String.valueOf(lr.Collect_Time__c);
+            }
             Map<String,String> labResultTemplate = new Map<String,String>{
                 'SFPaientId' => lr.Patient__c,
                 'SFAccountId' => lr.Account__c,
@@ -76,8 +82,8 @@ public with sharing class Helpers {
                 'ICU' => c.ICU__c,
                 'ResidentInACongregateCareSetting' => c.Resident_in_a_congregate_care_setting__c,
                 //'Date of Symptom Onset' => c.Date_of_Symptom_Onset__c.format(),
-                'CollectionDate' => c.Collect_Date__c.format(),
-                'CollectionTime' => String.valueOf(c.Collect_Time__c),
+                'CollectDate' => c.Collect_Date__c.format(),
+                'CollectTime' => String.valueOf(c.Collect_Time__c),
                 'TestType' => c.Test_Type__c,
                 'OrderingFacilityName' => c.Account.Name,
                 'OrderingFacilityPhone' => c.Account.Phone,

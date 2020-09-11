@@ -16,7 +16,7 @@
   -- |=====================                                               |
   -- |Version     Date           Author       Remarks                     |
   -- |=========   ============  =========    ===========================  |
-  -- |1.0          08/24/2020     Londono L    Initial version            |
+  -- |1.0         08/24/2020    Londono L    Initial version              |
   -- |                                                                    |
   -- +===================================================================+
   */
@@ -32,22 +32,23 @@ global with sharing class NeprhonLabsAPI {
         LastJobDate__c lastJob = LastJobDate__c.getOrgDefaults();
         Datetime lastJobDate = lastJob.LastJob__c;
         String recordType = request.requestURI.substring(request.requestURI.lastIndexOf('/')+1); 
+        System.debug('--------'+RecordType);
 
-        if(recordType != 'patients'){
+        if(recordType.contains('labResults')){
             List<Lab_Result__c> labResultsOnJob =  new List<Lab_Result__c>();
             List<Map<String,String>> results =  new List<Map<String,String>>();
             Map<String, String> params = request.params;
             Datetime initialTime;
             Datetime finalTime;
             Datetime now = System.now();
-            APIJobs__c thisJobDatetime = new APIJobs__c();
             
-            if(params.get('Date') != null) {
-                initialTime = date.valueOf(params.get('Date'));
+            
+            if(params.get('date') != null) {
+                initialTime = date.valueOf(params.get('date'));
                 finalTime = initialTime.addHours(24);
             }     
-            String incremental = params.get('Incremental');
-            String incrementalCommit = params.get('Incremental-Commit');
+            String incremental = params.get('incremental');
+            String incrementalCommit = params.get('incrementalCommit');
 
             response.statusCode = 200;  
 
@@ -65,14 +66,14 @@ global with sharing class NeprhonLabsAPI {
             String finalQuery = 'initialTime AND  LastModifiedDate <: finalTime ';
 
             if(params.size() >= 1){
-                if(initialTime != null && (incremental != 'Y' )){
+                if(initialTime != null && (incremental != 'y' )){
                     query += finalQuery;
                     results = Helpers.createMapOfResultsToSerialize(database.query(query));
                     if(results.size() == 0){
                         response.statusCode = 404;
                     }                            
                 }else{
-                    if(incremental == 'Y'){
+                    if(incremental == 'y'){
                         finalQuery = 'lastJobDate AND  LastModifiedDate <: now';
                         query += finalQuery;
                         results = Helpers.createMapOfResultsToSerialize(database.query(query)); 
@@ -87,61 +88,65 @@ global with sharing class NeprhonLabsAPI {
                response.statusCode = 400;
             }
 
-            if(incrementalCommit == 'Y'){  
+            if(incrementalCommit == 'y'){  
                     lastJob.LastJob__c = System.now();
                     update lastJob;         
             }
             response.responseBody = Blob.valueOf(JSON.serialize(results));
         }
         else{
-            Map<String, String> params = request.params;
-            List<Map<String,String>> patients = new List<Map<String,String>>();
-            Id recordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName()
-            .get('Patient_Record').getRecordTypeId();
-            Date collectionDate;
-            if(params.get('collectionDate') != null){
-               collectionDate =  Date.valueOf(params.get('collectionDate'));
-            }
-            
-            String accountId = params.get('accountId');
-            Date finalDate;
-            
-            String query = 'SELECT LastName, MiddleName, FirstName, Phone, MailingCountry, MailingState, MailingCity,'+
-            'MailingStreet, MailingPostalCode, County__c, Race__c, Sex__c, Patient_ID__c, Specimen_ID__c, Pregnant__c,'+
-            'Employed_in_healthcare__c, Symptomatic_as_defined_by_CDC__c, Medical_Release_Received__c, Hospitalized__c,'+
-            'ICU__c, Resident_in_a_congregate_care_setting__c, Date_of_Symptom_Onset__c, Collect_Date__c, Collect_Time__c,'+
-            'Test_Type__c, Account.Name, Account.BillingCountry, Account.BillingState, Account.BillingCity,'+
-            'Account.BillingStreet, Account.BillingPostalCode, Account.Phone FROM Contact WHERE RecordTypeId =: recordTypeId ';
+            if(recordType.contains('patients')){
+                Map<String, String> params = request.params;
+                List<Map<String,String>> patients = new List<Map<String,String>>();
+                Id recordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName()
+                .get('Patient_Record').getRecordTypeId();
+                Date collectionDate;
+                if(params.get('collectDate') != null){
+                   collectionDate =  Date.valueOf(params.get('collectDate'));
+                }
 
-            String finalQuery;
+                String accountId = params.get('accountId');
+                Date finalDate;
 
-            if(collectionDate != null && accountId !=null){
-                finalDate = collectionDate.addDays(1);
-                finalQuery = 'AND Collect_Date__c >=: collectionDate AND Collect_Date__c <: finalDate '+
-                'AND AccountId =: accountId';
-                query+=finalQuery;
-                patients = Helpers.createMapOfPatientsToSerialize(Database.query(query));
-                response.responseBody = Blob.valueOf(JSON.serialize(patients));
-                response.statusCode = 200;
-            }else{
-                if(collectionDate != null){
+                String query = 'SELECT LastName, MiddleName, FirstName, Phone, MailingCountry, MailingState,Address_2__c, MailingCity,'+
+                'MailingStreet, MailingPostalCode, County__c, Race__c, Sex__c, Patient_ID__c, Specimen_ID__c, Pregnant__c,'+
+                'Employed_in_healthcare__c, Symptomatic_as_defined_by_CDC__c, Medical_Release_Received__c, Hospitalized__c,'+
+                'ICU__c, Resident_in_a_congregate_care_setting__c, Date_of_Symptom_Onset__c, Collect_Date__c, Collect_Time__c,'+
+                'Test_Type__c, Account.Name, Account.BillingCountry, Account.BillingState, Account.BillingCity,'+
+                'Account.BillingStreet, Account.BillingPostalCode, Account.Phone FROM Contact WHERE RecordTypeId =: recordTypeId ';
+
+                String finalQuery;
+
+                if(collectionDate != null && accountId !=null){
                     finalDate = collectionDate.addDays(1);
-                    finalQuery = 'AND Collect_Date__c >=: collectionDate AND Collect_Date__c <: finalDate';
+                    finalQuery = 'AND Collect_Date__c >=: collectionDate AND Collect_Date__c <: finalDate '+
+                    'AND AccountId =: accountId';
                     query+=finalQuery;
                     patients = Helpers.createMapOfPatientsToSerialize(Database.query(query));
                     response.responseBody = Blob.valueOf(JSON.serialize(patients));
                     response.statusCode = 200;
                 }else{
-                    if(accountId !=null){
-                        finalQuery = 'AND AccountId =: accountId';
+                    if(collectionDate != null){
+                        finalDate = collectionDate.addDays(1);
+                        finalQuery = 'AND Collect_Date__c >=: collectionDate AND Collect_Date__c <: finalDate';
                         query+=finalQuery;
                         patients = Helpers.createMapOfPatientsToSerialize(Database.query(query));
                         response.responseBody = Blob.valueOf(JSON.serialize(patients));
                         response.statusCode = 200;
                     }else{
-                        response.statusCode = 400;
+                        if(accountId !=null){
+                            finalQuery = 'AND AccountId =: accountId';
+                            query+=finalQuery;
+                            patients = Helpers.createMapOfPatientsToSerialize(Database.query(query));
+                            response.responseBody = Blob.valueOf(JSON.serialize(patients));
+                            response.statusCode = 200;
+                        }else{
+                            response.statusCode = 400;
+                        }
                     }
                 }
+            }else{
+                response.statusCode = 400;
             }
         }  
     }
@@ -157,7 +162,7 @@ global with sharing class NeprhonLabsAPI {
         List<SObject> requestBodyInfo = new List<SObject>();
         List<SObject> dataToInsert = new List <SObject>();
          
-        if(recordType == 'LabResults'){
+        if(recordType == 'labResults'){
             requestBodyInfo = (List<Lab_Result__c>)
             JSON.deserialize(request.requestBody.toString(), List<Lab_Result__c>.class);  
             Schema.SObjectField fToken = Lab_Result__c.Fields.Id;
@@ -172,7 +177,7 @@ global with sharing class NeprhonLabsAPI {
             response.responseBody = Blob.valueOf(JSON.serialize(LabsResultdsUpserted));
         }  
            
-        if(recordType == 'Patients'){
+        if(recordType == 'patients'){
             requestBodyInfo = (List<Contact>)
             JSON.deserialize(request.requestBody.toString(), List<Contact>.class);
             Schema.SObjectField fToken = Contact.Fields.Specimen_ID__c;

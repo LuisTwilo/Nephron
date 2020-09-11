@@ -98,41 +98,80 @@ public with sharing class NephronCustomAPITest {
    
    @isTest(SeeAllData=true)
     public static void testGetLabResulstHappyPath(){
-
         List<Lab_Result__c> createdResults = TestFactory.generateLabResult(5);
-
         RestRequest request = new RestRequest();
         RestResponse response = new RestResponse();
         response.statusCode = 200;
-        request.params.put('Date', '2020-09-01');
-        request.params.put('Incremental', 'N');
-        request.params.put('Incremental-Commit', 'Y');
-        request.requestURI = baseUrl+serviceURL+'?Incremental=N&Incremental-Commit=Y&Date=2020-08-26';
+        request.params.put('date', '2020-09-01');
+        request.params.put('incremental', 'n');
+        request.params.put('incrementalCommit', 'y');
+        request.requestURI = baseUrl+serviceURL+'/labResults';
         request.httpMethod = 'GET';
         RestContext.request = request;
         RestContext.response = response;
-
-       
-        List<Lab_Result__c> results = NeprhonLabsAPI.getData();
-        System.assert(results != null);
+        NeprhonLabsAPI.getData();
+        
     }
 
     @isTest(SeeAllData=true)
     public static void testGetLabResulsIncremental(){
         List<Lab_Result__c> createdResults = TestFactory.generateLabResult(5);
-
         RestRequest request = new RestRequest();
         RestResponse response = new RestResponse();
         response.statusCode = 200;
-        request.params.put('Date', '2020-09-01');
-        request.params.put('Incremental', 'Y');
-        request.params.put('Incremental-Commit', 'Y');
-        request.requestURI = baseUrl+serviceURL+'?Incremental=N&Incremental-Commit=Y&Date=2020-08-26';
+        request.params.put('date', '2020-09-11');
+        request.params.put('incremental', 'y');
+        request.params.put('incrementalCommit', 'y');
+        request.requestURI = baseUrl+serviceURL+'/labResults';
         request.httpMethod = 'GET';
         RestContext.request = request;
         RestContext.response = response;
+        NeprhonLabsAPI.getData();
+    }
 
-        List<Lab_Result__c> results = NeprhonLabsAPI.getData();
+    @isTest
+    public static void testGetPatientsInfoByDate(){
+        List<Contact> contacts = TestFactory.generatePatients(5);
+        RestRequest request = new RestRequest();
+        RestResponse response = new RestResponse();
+        response.statusCode = 200;
+        request.params.put('collectDate', '2020-09-11');
+        request.requestURI = baseUrl+serviceURL+'/patients';
+        request.httpMethod = 'GET';
+        RestContext.request = request;
+        RestContext.response = response;
+        NeprhonLabsAPI.getData();
+    }
+
+    @isTest
+    public static void testGetPatientsInfoByAccountAndDate(){
+        List<Contact> contacts = TestFactory.generatePatients(5);
+        Id accId = contacts[0].AccountId;
+        RestRequest request = new RestRequest();
+        RestResponse response = new RestResponse();
+        response.statusCode = 200;
+        request.params.put('collectDate', '2020-09-11');
+        request.params.put('accountId', 'abc123');
+        request.requestURI = baseUrl+serviceURL+'/patients';
+        request.httpMethod = 'GET';
+        RestContext.request = request;
+        RestContext.response = response;
+        NeprhonLabsAPI.getData();
+    }
+
+    @isTest
+    public static void testGetPatientsInfoByAccount(){
+        List<Contact> contacts = TestFactory.generatePatients(5);
+        Id accId = contacts[0].AccountId;
+        RestRequest request = new RestRequest();
+        RestResponse response = new RestResponse();
+        response.statusCode = 200;
+        request.params.put('accountId', 'abc123');
+        request.requestURI = baseUrl+serviceURL+'/patients';
+        request.httpMethod = 'GET';
+        RestContext.request = request;
+        RestContext.response = response;
+        NeprhonLabsAPI.getData();
     }
 
     @isTest
@@ -142,7 +181,7 @@ public with sharing class NephronCustomAPITest {
         request.requestBody = Blob.valueOf(LabResultsJSONRequest);
         request.headers.put('Content-Type', 'application/json');
         request.httpMethod = 'POST';
-        request.requestURI = baseUrl+serviceURL+'/LabResults';
+        request.requestURI = baseUrl+serviceURL+'/labResults';
         response.statusCode = 201;
         RestContext.request = request;
         RestContext.response = response;
@@ -157,11 +196,10 @@ public with sharing class NephronCustomAPITest {
         request.requestBody = Blob.valueOf(patientJSONRequest);
         request.headers.put('Content-Type', 'application/json');
         request.httpMethod = 'POST';
-        request.requestURI = baseUrl+serviceURL+'/Patients';
+        request.requestURI = baseUrl+serviceURL+'/patients';
         response.statusCode = 201;
         RestContext.request = request;
         RestContext.response = response;
-
         NeprhonLabsAPI.upsertData();
     }
 }
