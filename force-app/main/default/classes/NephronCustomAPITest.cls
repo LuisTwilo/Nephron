@@ -16,7 +16,7 @@ public with sharing class NephronCustomAPITest {
 
     private static String patientJSONRequest = '['+
        ' {'+
-       '    "AccountId":"0010v00000XYPz5AAH",'+
+       '    "AccountId":"0016g00000AZkUpAAL",'+
        '    "LastName":"Londono",'+ 
        '    "MiddleName":"Al",'+
        '    "FirstName":"Luis", '+
@@ -55,7 +55,7 @@ public with sharing class NephronCustomAPITest {
        '    "Patient_Contacted__c":""'+
        '}, '+
        '{'+
-       '    "AccountId":"0010v00000XYPz5AAH",'+
+       '    "AccountId":"0016g00000AZkUpAAL",'+
        '    "LastName":"Londono", '+
        '    "MiddleName":"F",'+
        '    "FirstName":"Juan",'+ 
@@ -102,7 +102,7 @@ public with sharing class NephronCustomAPITest {
         RestRequest request = new RestRequest();
         RestResponse response = new RestResponse();
         response.statusCode = 200;
-        request.params.put('date', '2020-09-01');
+        request.params.put('date', '2020-10-09');
         request.params.put('incremental', 'n');
         request.params.put('incrementalCommit', 'y');
         request.requestURI = baseUrl+serviceURL+'/labResults';
@@ -119,7 +119,7 @@ public with sharing class NephronCustomAPITest {
         RestRequest request = new RestRequest();
         RestResponse response = new RestResponse();
         response.statusCode = 200;
-        request.params.put('date', '2020-09-11');
+        request.params.put('date', '2020-10-09');
         request.params.put('incremental', 'y');
         request.params.put('incrementalCommit', 'y');
         request.requestURI = baseUrl+serviceURL+'/labResults';
@@ -135,7 +135,7 @@ public with sharing class NephronCustomAPITest {
         RestRequest request = new RestRequest();
         RestResponse response = new RestResponse();
         response.statusCode = 200;
-        request.params.put('collectDate', '2020-09-11');
+        request.params.put('collectDate', '2020-10-09');
         request.requestURI = baseUrl+serviceURL+'/patients';
         request.httpMethod = 'GET';
         RestContext.request = request;
@@ -150,7 +150,7 @@ public with sharing class NephronCustomAPITest {
         RestRequest request = new RestRequest();
         RestResponse response = new RestResponse();
         response.statusCode = 200;
-        request.params.put('collectDate', '2020-09-11');
+        request.params.put('collectDate', '2020-10-09');
         request.params.put('accountId', 'abc123');
         request.requestURI = baseUrl+serviceURL+'/patients';
         request.httpMethod = 'GET';

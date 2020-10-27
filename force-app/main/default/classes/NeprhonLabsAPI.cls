@@ -32,7 +32,6 @@ global with sharing class NeprhonLabsAPI {
         LastJobDate__c lastJob = LastJobDate__c.getOrgDefaults();
         Datetime lastJobDate = lastJob.LastJob__c;
         String recordType = request.requestURI.substring(request.requestURI.lastIndexOf('/')+1); 
-        System.debug('--------'+RecordType);
 
         if(recordType.contains('labResults')){
             List<Lab_Result__c> labResultsOnJob =  new List<Lab_Result__c>();
@@ -42,9 +41,10 @@ global with sharing class NeprhonLabsAPI {
             Datetime finalTime;
             Datetime now = System.now();
             
-            
-            if(params.get('date') != null) {
+            if(params.get('date') != null) {          
                 initialTime = date.valueOf(params.get('date'));
+                Integer offset = UserInfo.getTimezone().getOffset(initialTime);
+                initialTime = initialTime.addSeconds(-1*(offset/1000));
                 finalTime = initialTime.addHours(24);
             }     
             String incremental = params.get('incremental');
@@ -60,10 +60,10 @@ global with sharing class NeprhonLabsAPI {
             'Account__r.BillingPostalCode, Account__r.Phone, Patient__r.Patient_ID__c, TestType__c,'+
             'Patient__r.First_test__c,  Patient__r.Employed_in_healthcare__c, Patient__r.Symptomatic_as_defined_by_CDC__c,'+
             'Patient__r.Hospitalized__c, Patient__r.ICU__c, Patient__r.Resident_in_a_congregate_care_setting__c,'+
-            'Patient__r.Pregnant__c, Patient__r.Specimen_ID__c, Results__c, Collect_Date__c, Collect_Time__c, CreatedDate '+    
-            'FROM Lab_Result__c WHERE LastModifiedDate >: ';
+            'Patient__r.Pregnant__c, Specimen_ID__c, Results__c, Collect_Date__c, Collect_Time__c, CreatedDate '+    
+            'FROM Lab_Result__c WHERE CreatedDate >: ';
 
-            String finalQuery = 'initialTime AND  LastModifiedDate <: finalTime ';
+            String finalQuery = 'initialTime AND  CreatedDate <: finalTime ';
 
             if(params.size() >= 1){
                 if(initialTime != null && (incremental != 'y' )){
@@ -74,7 +74,7 @@ global with sharing class NeprhonLabsAPI {
                     }                            
                 }else{
                     if(incremental == 'y'){
-                        finalQuery = 'lastJobDate AND  LastModifiedDate <: now';
+                        finalQuery = 'lastJobDate AND  CreatedDate <: now';
                         query += finalQuery;
                         results = Helpers.createMapOfResultsToSerialize(database.query(query)); 
                         if(results.size() == 0){
@@ -101,9 +101,10 @@ global with sharing class NeprhonLabsAPI {
                 Id recordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName()
                 .get('Patient_Record').getRecordTypeId();
                 Date collectionDate;
+                
                 if(params.get('collectDate') != null){
                    collectionDate =  Date.valueOf(params.get('collectDate'));
-                }
+                }   
 
                 String accountId = params.get('accountId');
                 Date finalDate;

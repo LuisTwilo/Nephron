@@ -42,7 +42,6 @@ public with sharing class TestFactory {
             c.Test_Type__c = 'Oropharyngeal';
             c.RecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByDeveloperName()
             .get('Patient_Record').getRecordTypeId();
-
             patients.add(c);
         }
         insert patients;

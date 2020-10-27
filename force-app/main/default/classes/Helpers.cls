@@ -1,16 +1,23 @@
 public with sharing class Helpers {
+    
     public static List<Map<String,String>> createMapOfResultsToSerialize(List<Lab_Result__c> labResults){
         List<Map<String,String>> labResultList = new List<Map<String,String>>();
         for (Lab_Result__c lr: labResults){
 
-            String DOB = '';
-            String collectDate = '';
-            String collectTime = '';
+            String DOB;
+            String collectDate;
+            String collectTime;
 
             if(lr.Patient__r != null){
+                if( lr.Patient__r.Birthdate != null){
                 DOB = lr.Patient__r.Birthdate.format();
-                collectDate = lr.Collect_Date__c.format();
+                }
+                if( lr.Collect_Date__c != null){
+                    collectDate = lr.Collect_Date__c.format();
+                }
+                if( lr.Collect_Time__c != null){
                 collectTime = String.valueOf(lr.Collect_Time__c);
+                }
             }
             Map<String,String> labResultTemplate = new Map<String,String>{
                 'SFPaientId' => lr.Patient__c,
@@ -20,7 +27,7 @@ public with sharing class Helpers {
                 'CollectDate' => collectDate,
                 'CollectTime' =>collectTime,
                 'SFLabResultId' => lr.Id,
-                'SpecimenId' => lr.Patient__r.Specimen_ID__c,
+                'SpecimenId' => lr.Specimen_ID__c,
                 'PatientId' => lr.Patient__r.Patient_ID__c,
                 'PatientFirstName' => lr.Patient__r.FirstName,
                 'PatientMiddleName' => lr.Patient__r.MiddleName,
@@ -49,7 +56,7 @@ public with sharing class Helpers {
                 'ICU' => lr.Patient__r.ICU__c,
                 'ResidentInACongregateCareSetting' => lr.Patient__r.Resident_in_a_congregate_care_setting__c,
                 'Pregnant' => lr.Patient__r.Pregnant__c,
-                'ResultDatetime' => lr.CreatedDate.format('yyyy-dd-mm h:mm')
+                'ResultDatetime' => lr.CreatedDate.format('yyyy-MM-dd h:mm')
             }; 
             labResultList.add(labResultTemplate);       
         }
@@ -59,6 +66,20 @@ public with sharing class Helpers {
     public static List<Map<String,String>> createMapOfPatientsToSerialize(List<Contact> patients){
         List<Map<String, String>> patientList = new List<Map<String, String>>();
         for(Contact c : patients){
+            String DateOnSymptom;
+            String collectDate;
+            String collectTime;
+
+            if( c.Date_of_Symptom_Onset__c != null){
+                DateOnSymptom = c.Date_of_Symptom_Onset__c.format();
+            }
+            if(c.Collect_Date__c != null){
+                collectDate = c.Collect_Date__c.format();
+            }
+            if(c.Collect_Time__c != null){
+                collectTime = String.valueOf(c.Collect_Time__c);
+            }
+    
             Map<String,String> patient = new Map<String,String>{
                 'FirstName' => c.FirstName,
                 'MiddleName' => c.MiddleName,
@@ -81,9 +102,9 @@ public with sharing class Helpers {
                 'Hospitalized' => c.Hospitalized__c,
                 'ICU' => c.ICU__c,
                 'ResidentInACongregateCareSetting' => c.Resident_in_a_congregate_care_setting__c,
-                //'Date of Symptom Onset' => c.Date_of_Symptom_Onset__c.format(),
-                'CollectDate' => c.Collect_Date__c.format(),
-                'CollectTime' => String.valueOf(c.Collect_Time__c),
+                'Date of Symptom Onset' => DateOnSymptom,
+                'CollectDate' => collectDate,
+                'CollectTime' => collectTime,
                 'TestType' => c.Test_Type__c,
                 'OrderingFacilityName' => c.Account.Name,
                 'OrderingFacilityPhone' => c.Account.Phone,
@@ -97,4 +118,5 @@ public with sharing class Helpers {
         }
         return patientList;
     }
+
 }
